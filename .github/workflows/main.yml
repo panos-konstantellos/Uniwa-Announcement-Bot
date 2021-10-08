@@ -32,5 +32,5 @@ jobs:
       - name: Run
         run: dotnet source/Uniwa.Announcement.Bot/bin/Debug/net5.0/Uniwa.Announcement.Bot.dll
         env:
-          DiscordToken: ${{ secrets.DISCORDCHANNELID }}
-          DiscordChannelId: ${{ secrets.DISCORDTOKEN }}
+          DiscordToken: ${{ secrets.DISCORDTOKEN }}
+          DiscordChannelId: ${{ secrets.DISCORDCHANNELID }}
