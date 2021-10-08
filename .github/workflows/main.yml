@@ -36,6 +36,6 @@ jobs:
           DiscordChannelId: ${{ secrets.DISCORDCHANNELID }}
       - uses: actions/checkout@v2
       - run: |
-          git add lastupdate.log
+          git add .
           git commit
           git push
