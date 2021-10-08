@@ -36,6 +36,8 @@ jobs:
           DiscordChannelId: ${{ secrets.DISCORDCHANNELID }}
       - uses: actions/checkout@v2
       - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git add .
-          git commit
+          git commit -m "auto generated commit"
           git push
