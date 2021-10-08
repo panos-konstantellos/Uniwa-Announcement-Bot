@@ -30,7 +30,8 @@ jobs:
       - name: Build
         run: dotnet build --no-restore source/Uniwa.Announcement.Bot.sln
       - name: Run
-        run: dotnet source/Uniwa.Announcement.Bot/bin/Debug/net5.0/Uniwa.Announcement.Bot.dll
+        run: dotnet ../source/Uniwa.Announcement.Bot/bin/Debug/net5.0/Uniwa.Announcement.Bot.dll
+        working-directory: ./dist
         env:
           DiscordToken: ${{ secrets.DISCORDTOKEN }}
           DiscordChannelId: ${{ secrets.DISCORDCHANNELID }}
