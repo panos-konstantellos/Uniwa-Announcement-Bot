@@ -34,8 +34,8 @@ jobs:
         env:
           DiscordToken: ${{ secrets.DISCORDTOKEN }}
           DiscordChannelId: ${{ secrets.DISCORDCHANNELID }}
-      - name: Commit logs
-        run: |
+      - uses: actions/checkout@v2
+      - run: |
           git add lastupdate.log
           git commit
           git push
