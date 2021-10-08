@@ -53,7 +53,7 @@ namespace Uniwa.Announcement.Bot
                 {
                     try
                     {
-                        await client.AnnounceAsync(Convert.ToUInt64(channelId), $"{article.Title} {article.Link}", cancellationToken);
+                        await client.AnnounceAsync(Convert.ToUInt64(channelId), article, cancellationToken);
 
                         lastDate = article.LastUpdatedTime;
                     }
