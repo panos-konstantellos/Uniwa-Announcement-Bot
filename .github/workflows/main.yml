@@ -36,7 +36,7 @@ jobs:
           DiscordChannelId: ${{ secrets.DISCORDCHANNELID }}
       - uses: actions/checkout@v2
       - run: |
-          date > generated.txt
+          date > lastexecuted.log
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
