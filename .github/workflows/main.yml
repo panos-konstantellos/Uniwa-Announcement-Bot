@@ -36,8 +36,8 @@ jobs:
           DiscordToken: ${{ secrets.DISCORDTOKEN }}
           DiscordChannelId: ${{ secrets.DISCORDCHANNELID }}
       - name: Auto generate commits
+        continue-on-error: true
         run: |
-          date > dist/lastexecuted.log
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
