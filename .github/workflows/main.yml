@@ -24,13 +24,13 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 5.0.x
+          dotnet-version: 6.0.x
       - name: Restore dependencies
         run: dotnet restore source/Uniwa.Announcement.Bot.sln
       - name: Build
         run: dotnet build --no-restore source/Uniwa.Announcement.Bot.sln
       - name: Run
-        run: dotnet ../source/Uniwa.Announcement.Bot/bin/Debug/net5.0/Uniwa.Announcement.Bot.dll
+        run: dotnet ../source/Uniwa.Announcement.Bot/bin/Debug/net6.0/Uniwa.Announcement.Bot.dll
         working-directory: ./dist
         env:
           DiscordToken: ${{ secrets.DISCORDTOKEN }}
@@ -41,5 +41,4 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m "auto generated commit"
-          git push
+          git diff-index --cached --quiet HEAD || (git commit -m "auto generated commit" && git push)
