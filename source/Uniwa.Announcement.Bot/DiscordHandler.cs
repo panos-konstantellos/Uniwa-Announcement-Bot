@@ -24,13 +24,23 @@ namespace Uniwa.Announcement.Bot
                 throw new ArgumentNullException(nameof(func));
             }
 
+            this._client.Log += async (message) =>
+            {
+                await Task.CompletedTask;
+
+                if(message.Exception is not null)
+                {
+                    throw message.Exception;
+                }
+            };
+
             this._client.Ready += async () => await func.Invoke(this, cancellationToken);
 
             await this._client.LoginAsync(TokenType.Bot, this._accessToken);
             await this._client.StartAsync();
         }
 
-        async Task IDiscordClient.AnnounceAsync(ulong channelId, string message, CancellationToken cancellationToken)
+        async Task IDiscordClient.AnnounceAsync(ulong channelId, Article article, CancellationToken cancellationToken)
         {
             var channel =  this._client.GetChannel(channelId);
 
@@ -39,12 +49,14 @@ namespace Uniwa.Announcement.Bot
                 throw new InvalidCastException($"{nameof(channel)} is not assignable from {nameof(IMessageChannel)}");
             }
 
-            await _channel.SendMessageAsync(message, false, null, new RequestOptions
-            {
-                RetryMode = RetryMode.AlwaysRetry,
-                CancelToken = cancellationToken,
-                Timeout = Convert.ToInt32(TimeSpan.FromSeconds(30).TotalMilliseconds)
-            });
+            var embed = new EmbedBuilder()
+                .WithTitle(article.Title)
+                .WithDescription(article.Summary)
+                .WithUrl(article.Link)
+                .WithColor(Color.Blue)
+                .Build();
+
+            await _channel.SendMessageAsync("", false, embed);
         }
     }
 }
