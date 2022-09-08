@@ -24,6 +24,16 @@ namespace Uniwa.Announcement.Bot
             var channelId = Environment.GetEnvironmentVariable("DiscordChannelId") 
                 ?? throw new ArgumentNullException("DiscordChannelId");
         
+            if(string.IsNullOrEmpty(accessToken))
+            {
+                throw new ArgumentNullException("DiscordToken");
+            }
+
+            if(string.IsNullOrEmpty(channelId))
+            {
+                throw new ArgumentNullException("DiscordChannelId");
+            }
+
             var tokenSource = new CancellationTokenSource();
             var cancellationToken = tokenSource.Token;
             var exitCode = -1;
@@ -43,7 +53,7 @@ namespace Uniwa.Announcement.Bot
                 {
                     try
                     {
-                        await client.AnnounceAsync(Convert.ToUInt64(channelId), $"{article.Title} {article.Link}", cancellationToken);
+                        await client.AnnounceAsync(Convert.ToUInt64(channelId), article, cancellationToken);
 
                         lastDate = article.LastUpdatedTime;
                     }

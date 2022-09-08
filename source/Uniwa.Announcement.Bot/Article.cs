@@ -2,7 +2,7 @@ using System;
 
 namespace Uniwa.Announcement.Bot
 {
-    internal class Article
+    public sealed class Article
     {
         public string Title { get; set; }
         
